@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class MenuAdmin extends JFrame {
 
@@ -10,15 +11,28 @@ public class MenuAdmin extends JFrame {
     JMenu mnuOpen;
     JMenuItem mnuEM, mnuLM, mnuPM, mnuExit;
 
-    public MenuAdmin(){
+    // this will store the logged-in admin name
+    private String adminName;
+
+    // default constructor
+    public MenuAdmin() {
+        this("Admin");
+    }
+
+    // constructor used from Login
+    public MenuAdmin(String adminName){
+        this.adminName = adminName;
+
         setSize(700,400);
         setTitle("Menu (Admin)");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
 
         createMenu();
         loadCentre();
         loadTop();
+
         setVisible(true);
     }
 
@@ -49,7 +63,7 @@ public class MenuAdmin extends JFrame {
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(40,80,60,80));
 
         lblName = new JLabel();
-        lblName.setText("Welcome!");
+        lblName.setText("Welcome! " + adminName);
         lblName.setFont(new Font("Sans Serif", Font.BOLD, 58));
 
         btnEM = new JButton("Employee management");
@@ -67,17 +81,30 @@ public class MenuAdmin extends JFrame {
         btnPM.setForeground(Color.white);
         btnPM.setFocusable(false);
 
+        // button actions
+        btnEM.addActionListener(e -> {
+    new EmployManageAdmin();
+    dispose();
+});
+btnLM.addActionListener(e -> {
+    new LeaveManageAdmin();
+    dispose();
+});
+btnPM.addActionListener(e -> {
+    new PayrollManageAdmin();
+    dispose();
+});
+
         containerPanel.add(lblName);
 
         buttonPanel.add(btnEM);
         buttonPanel.add(btnLM);
         buttonPanel.add(btnPM);
 
-        centrePanel.add(containerPanel, BorderLayout.NORTH);
-        centrePanel.add(buttonPanel, BorderLayout.CENTER);
+        centrePanel.add(containerPanel);
+        centrePanel.add(buttonPanel);
 
-        add(centrePanel);
-        
+        add(centrePanel, BorderLayout.CENTER);
     }
 
     void createMenu(){
@@ -88,6 +115,22 @@ public class MenuAdmin extends JFrame {
         mnuPM = new JMenuItem("Payroll management");
         mnuExit = new JMenuItem("Exit");
 
+        // menu actions
+        mnuEM.addActionListener(e -> {
+    new EmployManageAdmin();
+    dispose();
+});
+mnuLM.addActionListener(e -> {
+    new LeaveManageAdmin();
+    dispose();
+});
+mnuPM.addActionListener(e -> {
+    new PayrollManageAdmin();
+    dispose();
+});
+mnuExit.addActionListener(e -> dispose());
+
+
         mnuOpen.add(mnuEM);
         mnuOpen.add(mnuLM);
         mnuOpen.add(mnuPM);
@@ -96,8 +139,6 @@ public class MenuAdmin extends JFrame {
 
         mnuBarTop.add(mnuOpen);
 
-       
         setJMenuBar(mnuBarTop);
     }
-    
 }

@@ -1,13 +1,11 @@
 public class Main {
-    public static void main (String[]args){
-        new PayrollManageUser();
-        new PayrollManageAdmin();
-        //new LeaveManageUser();
-        //new LeaveManageAdmin();
-        //new EmployManageUser();
-        //new EmployManageAdmin();
-        //new MenuUser();
-        //new MenuAdmin();
-        //new Login();
+    public static void main(String[] args) {
+        // Launch only ONE window — the entry point of your system
+        new Login();
+
+        // The rest will be opened by login logic automatically.
+        // Example: inside Login.java → doLogin():
+        // if (role.equals("admin")) new MenuAdmin(empName);
+        // else new MenuUser(empName);
     }
 }
