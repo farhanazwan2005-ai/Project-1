@@ -1,8 +1,8 @@
+
 import javax.swing.*;
 import java.awt.*;
 
-public class MenuAdmin extends JFrame {
-
+public class MenuUser extends JFrame{
     JPanel topPanel, centrePanel, containerPanel, buttonPanel;
     JLabel lblTitle, lblName;
     JButton btnEM, btnLM, btnPM;
@@ -10,9 +10,9 @@ public class MenuAdmin extends JFrame {
     JMenu mnuOpen;
     JMenuItem mnuEM, mnuLM, mnuPM, mnuExit;
 
-    public MenuAdmin(){
+    public MenuUser(){
         setSize(700,400);
-        setTitle("Menu (Admin)");
+        setTitle("Menu (User)");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -24,11 +24,11 @@ public class MenuAdmin extends JFrame {
 
     void loadTop(){
         topPanel = new JPanel();
-        topPanel.setBackground(java.awt.Color.decode("#4A70A9"));
+        topPanel.setBackground(java.awt.Color.decode("#05339C"));
         topPanel.setPreferredSize(new Dimension(1500,60));
 
         lblTitle = new JLabel();
-        lblTitle.setText("Admin");
+        lblTitle.setText("User");
         lblTitle.setForeground(Color.white);
         lblTitle.setFont(new Font("Sans Serif", Font.BOLD, 36));
 
@@ -53,17 +53,17 @@ public class MenuAdmin extends JFrame {
         lblName.setFont(new Font("Sans Serif", Font.BOLD, 58));
 
         btnEM = new JButton("Employee management");
-        btnEM.setBackground(java.awt.Color.decode("#4A70A9"));
+        btnEM.setBackground(java.awt.Color.decode("#05339C"));
         btnEM.setForeground(Color.white);
         btnEM.setFocusable(false);
 
         btnLM = new JButton("Leave management");
-        btnLM.setBackground(java.awt.Color.decode("#4A70A9"));
+        btnLM.setBackground(java.awt.Color.decode("#05339C"));
         btnLM.setForeground(Color.white);
         btnLM.setFocusable(false);
 
         btnPM = new JButton("Payroll management");
-        btnPM.setBackground(java.awt.Color.decode("#4A70A9"));
+        btnPM.setBackground(java.awt.Color.decode("#05339C"));
         btnPM.setForeground(Color.white);
         btnPM.setFocusable(false);
 
@@ -99,5 +99,4 @@ public class MenuAdmin extends JFrame {
        
         setJMenuBar(mnuBarTop);
     }
-    
 }
