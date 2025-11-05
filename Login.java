@@ -8,10 +8,11 @@ public class Login extends JFrame {
     JTextField txtUser, txtPass;
     JButton btLogin;
    public Login() {
-    setSize(400,550);
+    setSize(400,500);
     setTitle("Log In");
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setLocationRelativeTo(null);
+    setUndecorated(true);
 
     loadTop();
     loadCentre();
