@@ -7,7 +7,7 @@ public class Login extends JFrame {
     JPanel topPanel, centrePanel, centPanel, buttonPanel;
     JLabel topTitle, lblUser, lblPass;
     JTextField txtUser, txtPass;
-    JButton btLogin;
+    JButton btLogin, btReset;
 
     public Login() {
         setSize(400,500);
@@ -19,20 +19,18 @@ public class Login extends JFrame {
         loadTop();
         loadCentre();
 
-        // button action
-        btLogin.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doLogin();
-            }
-        });
+        // login button
+        btLogin.addActionListener(e -> doLogin());
 
         // enter key on password
-        txtPass.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doLogin();
-            }
+        txtPass.addActionListener(e -> doLogin());
+
+        // reset button
+        btReset.addActionListener(e -> {
+            // open reset page
+            new ResetPassword();
+            // you can dispose() here if you want only 1 window
+            // dispose();
         });
 
         setVisible(true);
@@ -60,7 +58,7 @@ public class Login extends JFrame {
         centPanel.setBorder(BorderFactory.createEmptyBorder(60,0,0,0));
         centPanel.setLayout(new FlowLayout());
 
-        buttonPanel = new JPanel();
+        buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
 
         ImageIcon icon = new ImageIcon("user.png");
         JLabel userIcon = new JLabel();
@@ -70,7 +68,7 @@ public class Login extends JFrame {
         lblPass = new JLabel("Password");
 
         txtUser = new JTextField(20);
-        txtPass = new JTextField(20);   // keep your design
+        txtPass = new JTextField(20);
 
         btLogin = new JButton("Log In");
         btLogin.setBackground(java.awt.Color.decode("#4A70A9"));
@@ -78,11 +76,20 @@ public class Login extends JFrame {
         btLogin.setFocusable(false);
         btLogin.setPreferredSize(new Dimension(150, 40));
 
+        // new reset button
+        btReset = new JButton("Reset");
+        btReset.setBackground(Color.LIGHT_GRAY);
+        btReset.setForeground(Color.BLACK);
+        btReset.setFocusable(false);
+        btReset.setPreferredSize(new Dimension(80, 30));
+
         centrePanel.add(lblUser);
         centrePanel.add(txtUser);
         centrePanel.add(lblPass);
         centrePanel.add(txtPass);
+
         buttonPanel.add(btLogin);
+        buttonPanel.add(btReset);
 
         centPanel.add(userIcon, BorderLayout.NORTH);
         centPanel.add(centrePanel);
@@ -115,7 +122,7 @@ public class Login extends JFrame {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                int empId = rs.getInt("emp_id");    // <<< grab the id
+                int empId = rs.getInt("emp_id");
                 String empName = rs.getString("name");
                 String role = rs.getString("role");
 
@@ -124,7 +131,6 @@ public class Login extends JFrame {
                 if ("admin".equalsIgnoreCase(role)) {
                     new MenuAdmin(empName);
                 } else {
-                    // pass id AND name so user pages can load their own data
                     new MenuUser(empId, empName);
                 }
                 dispose();
